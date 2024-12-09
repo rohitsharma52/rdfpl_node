@@ -1,0 +1,40 @@
+<%- include('../common/header') %>
+<div class="pc-container">
+          <div class="pc-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">                 
+                  <div class="col-md-12">
+                    <div class="page-header-title">
+                      <h2 class="mb-0">ADD Team</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h4 class="mt-0 header-title">ADD Team Form</h4>
+            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+            <div class="container mt-5">
+                <form action="/auth/add_team" method="post" >
+                   
+                    <div class="row mt-5">
+                        <div class="form-group col-md-6">
+                            <label for="username">UserName <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password">password <span style="color:red;">*</span></label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                    </div>
+            
+                    <div class="form-group mt-5">
+                        <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+                    </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+        <%- include('../common/footer')%>       

@@ -1,0 +1,87 @@
+<%- include('../common/header') %>
+<div class="pc-container">
+          <div class="pc-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                 
+                  <div class="col-md-12">
+                    <div class="page-header-title">
+                      <h2 class="mb-0">View Product</h2>
+                    </div>
+                  </div>
+                  <% if (success_msg && success_msg.length > 0) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <%= success_msg %>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+            <h4 class="mt-0 header-title">View Product</h4>
+            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+            <div class="container mt-5">
+                    <div class="row">
+                              <div class="col-md-2"> <a class="btn btn-info cticket" href="/auth/add_product" role="button" style="margin-left: 20px;"> Add Product</a></div>
+                            </div>
+                            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+                            <div class="table-rep-plugin">
+                              <div class="table-responsive b-0" data-pattern="priority-columns">
+                                <table id="userTable" class="table  table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th data-priority="1">Name</th>
+                                        <th data-priority="1">Feature Img</th>
+                                        <th data-priority="1">MRP</th>
+                                        <th data-priority="1">Sell Price</th>
+                                        <th data-priority="1">HSN Code</th>
+                                        <th data-priority="1">Type</th>
+                                        <th data-priority="4">Images</th>
+                                        <th data-priority="2">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <% let a = 1; %> <!-- Initialize counter variable -->
+                                      <% product_data.forEach(function(data) { %>
+                                        <tr>
+                                          <td><%= a %></td> <!-- Display counter variable -->
+                                          <td><%= data.name %></td>
+                                          <td>
+                                            <img id="slide_img_path" height="100" width="100" src="/<%= data.featureImg %>">
+                                          </td>
+                                          <td><%= data.mrp %></td>
+                                          <td><%= data.sellPrice %></td>
+                                          <td><%= data.hsnCode %></td>
+                                          <td>
+                                            <%= data.bestSeller ? 'Best Seller' : '' %>
+                                            <%= data.weeklyDeals ? 'Weekly Deals' : '' %>
+                                            <%= data.featuredProduct ? 'Featured' : '' %>
+                                          </td>
+                                          <td>
+                                            <!-- Loop over images and display them in one td -->
+                                            <% data.images.forEach(function(image) { %>
+                                              <img id="slide_img_path" height="100" width="100" src="/<%= image %>" alt="Product Image" style="margin-right: 10px;">
+                                            <% }) %>
+                                          </td>
+                                          <td style="text-align: center;">
+                                            <!-- Action buttons in one cell -->
+                                            <form action="/auth/delete_product/<%= data._id %>" method="post">
+                                              <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                            <a href="/auth/update_product/<%= data._id %>" class="btn btn-info mt-3">Update</a>
+                                          </td>
+                                        </tr>
+                                        <% a++; %> <!-- Increment counter variable -->
+                                      <% }); %>
+                                    </tbody>
+                                  </table>
+                                  
+                              </div>
+                            </div>   
+                </div>
+          </div>
+        </div>
+        <%- include('../common/footer')%> 

@@ -1,0 +1,189 @@
+<%- include('../common/header') %>
+    <div class="pc-container">
+        <div class="pc-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h2 class="mb-0">ADD Product</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="mt-0 header-title">ADD Product Form</h4>
+            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+
+            <div class="container mt-5">
+                <form action="/auth/add_product_process" method="post" enctype="multipart/form-data">
+                    <div class="row mt-5">
+                        <!-- Category Selection -->
+                        <div class="form-group col-md-4">
+                            <label for="category">Category <span style="color:red;">*</span></label>
+                            <select id="category" name="category_id" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <% category_data.forEach(function(category) { %>
+                                    <option value="<%= category._id %>" data-name="<%= category.name %>">
+                                        <%= category.name %>
+                                    </option>
+                                <% }) %>
+                            </select>
+                        </div>
+                
+                        <!-- Subcategory Selection (Dynamically populated) -->
+                        <div class="form-group col-md-4">
+                            <label for="subcategory">Subcategory <span style="color:red;">*</span></label>
+                            <select id="subcategory" name="subcategory_id" class="form-control" required>
+                                <option value="">Select Subcategory</option>
+                            </select>
+                        </div>
+                
+                        <div class="form-group col-md-4">
+                            <label for="name">Product Name <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                    </div>
+                
+                    <!-- Hidden inputs for category and subcategory names -->
+                    <input type="hidden" id="category_name" name="category_name">
+                    <input type="hidden" id="subcategory_name" name="subcategory_name">
+                
+                    <!-- Product Information -->
+                    <div class="row mt-5">
+                        <div class="form-group col-md-4">
+                            <label for="mrp">MRP <span style="color:red;">*</span></label>
+                            <input type="number" class="form-control" id="mrp" name="mrp" required>
+                        </div>
+                
+                        <div class="form-group col-md-4">
+                            <label for="sellPrice">Sell Price <span style="color:red;">*</span></label>
+                            <input type="number" class="form-control" id="sellPrice" name="sellPrice" required>
+                        </div>
+                
+                        <div class="form-group col-md-4">
+                            <label for="hsnCode">HSN Code <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" id="hsnCode" name="hsnCode" required>
+                        </div>
+                    </div>
+                
+                    <!-- Description -->
+                    <div class="form-group mt-3">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                    </div>
+                
+                    <div class="row mt-5">
+                        <div class="form-group col-md-4">
+                            <label for="featureImg">Feature Image <span style="color:red;">*</span></label>
+                            <input type="file" class="form-control" id="featureImg" name="featureImg" required>
+                        </div>
+                
+                        <div class="form-group col-md-4">
+                            <label for="images">Images</label>
+                            <input type="file" class="form-control" id="images" name="images" multiple required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Options:</label><br>
+                            <!-- Best Seller, Weekly Deals, Featured Product -->
+                            <div>
+                                <label for="bestSeller">Best Seller</label>
+                                <input type="checkbox" name="bestSeller" id="bestSeller"> 
+                            </div>
+                            <div>
+                                <label for="weeklyDeals">Weekly Deals</label>
+                                <input type="checkbox" name="weeklyDeals" id="weeklyDeals">
+                            </div>
+                            <div>
+                                <label for="featuredProduct">Featured Product</label>
+                                <input type="checkbox" name="featuredProduct" id="featuredProduct">
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                    
+                    <div class="form-group mt-2">
+                        <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+                    </div>
+                </form>
+                
+               
+                
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // jQuery for dynamically loading subcategories based on category selection
+        $('#category').on('change', function() {
+            const categoryId = $(this).val(); // Get selected category ID
+    
+            if (categoryId) {
+                // Fetch subcategories based on selected category using jQuery's AJAX
+                $.ajax({
+                    url: `/auth/get_subcategories/${categoryId}`,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        const subcategorySelect = $('#subcategory');
+                        subcategorySelect.empty(); // Clear the subcategory options
+                        subcategorySelect.append('<option value="">Select Subcategory</option>'); // Add the default option
+    
+                        // Iterate through the subcategories and add them to the select element
+                        data.forEach(function(subcategory) {
+                            subcategorySelect.append(
+                                `<option value="${subcategory._id}" data-name="${subcategory.name}">${subcategory.name}</option>`
+                            );
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching subcategories:", error);
+                    }
+                });
+            } else {
+                // If no category is selected, reset the subcategory select element
+                $('#subcategory').empty().append('<option value="">Select Subcategory</option>');
+            }
+        });
+    
+        // JavaScript to set category name and subcategory name when selected
+        $('#category').on('change', function() {
+            var selectedCategory = this.options[this.selectedIndex];
+            var categoryName = selectedCategory.text; // Use text instead of data-name
+            document.getElementById('category_name').value = categoryName;
+        });
+    
+        $('#subcategory').on('change', function() {
+            var selectedSubcategory = this.options[this.selectedIndex];
+            var subcategoryName = selectedSubcategory.getAttribute('data-name'); // Get name from data-name attribute
+            document.getElementById('subcategory_name').value = subcategoryName;
+        });
+    </script>
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include('../common/footer') %>
+
+       
