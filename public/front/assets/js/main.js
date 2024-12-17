@@ -1,3 +1,4 @@
+///////////////////     Swiper slider for Frontend/////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', () => {
     const swiper = new Swiper('.Category_swiper', {
         slidesPerView: 6, // Number of slides visible at once
@@ -32,3 +33,34 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const swiper = new Swiper('.swiper_feature', {
+        slidesPerView: 4, // Default for larger screens
+        spaceBetween: 20, // Adjust the gap between slides   
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            576: {
+                slidesPerView: 2, // 2 slides on screens >= 576px
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 3, // 3 slides on screens >= 768px
+                spaceBetween: 30,
+            },
+            1200: {
+                slidesPerView: 4, // 4 slides on screens >= 1200px
+                spaceBetween: 40,
+            },
+        },
+    });
+});
+///////////////////     Swiper slider enf Frontend/////////////////////////////////////////////////////////////
+

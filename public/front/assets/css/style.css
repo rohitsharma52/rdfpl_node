@@ -1,0 +1,58 @@
+.border_radius{
+    border-radius: 30px !important;
+}
+.product_bg{
+    background-color: #F7F7F7;
+}
+.best_seller_bg{
+    background-color: #eef6eb;
+}
+.swiper-buttons {
+    position: relative;
+    top: 0; /* Adjust if necessary */
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Aligns buttons to the right */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background-color: #f5f5f5; /* Background color of the circle */
+    border-radius: 50%; /* Makes them circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px; /* Icon size */
+    color: #333; /* Arrow color */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a slight shadow */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: #333; /* Changes background on hover */
+    color: #fff; /* Changes arrow color on hover */
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Icon Styling */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-family: "Font Awesome 5 Free"; /* Assuming Font Awesome is used */
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.swiper-button-next::after {
+    content: '\f105'; /* Unicode for right arrow */
+}
+
+.swiper-button-prev::after {
+    content: '\f104'; /* Unicode for left arrow */
+}
+

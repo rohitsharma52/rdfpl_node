@@ -4,4 +4,5 @@ import express from "express";
 import { fetchcategorydata } from "../../middleware.js";
 
 Front.get('/',fetchcategorydata,HomeController.home);
+
  

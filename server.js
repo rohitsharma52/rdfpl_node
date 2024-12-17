@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url"; // ES Modules ke liye `__dirname` support
 import { Login } from "./Api/login_route.js";
 import { checkAuth } from "./middleware.js";
+import { Ajax } from "./Api/front/front_ajax_route.js";
 
 //////////////////////////////__dirname   define///////////////////////////////////////////////
 const __filename = fileURLToPath(import.meta.url);
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
 app.use("/", Front);
 app.use('/auth',checkAuth, Admin);
 app.use('/login',Login);
+app.use('/ajax',Ajax);
 /////////////////////////////////server/////////////////////////////////////////////////
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

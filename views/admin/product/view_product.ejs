@@ -69,10 +69,17 @@
                                           <td style="text-align: center;">
                                             <!-- Action buttons in one cell -->
                                             <form action="/auth/delete_product/<%= data._id %>" method="post">
-                                              <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
-                                            <a href="/auth/update_product/<%= data._id %>" class="btn btn-info mt-3">Update</a>
-                                          </td>
+                                        
+                                           
+                                                <a href="/auth/update_product/<%= data._id %>" class="btn btn-info mb-2 mt-2 d-block">Update</a>
+                                                <a href="/auth/add_varient/<%= data._id %>" class="btn btn-info d-block">Add Type </a>
+                                           
+                                        </td>
+                                        
+                                        
+                                        
                                         </tr>
                                         <% a++; %> <!-- Increment counter variable -->
                                       <% }); %>
@@ -82,6 +89,8 @@
                               </div>
                             </div>   
                 </div>
+             
+              
           </div>
         </div>
         <%- include('../common/footer')%> 

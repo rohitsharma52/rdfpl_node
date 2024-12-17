@@ -7,6 +7,7 @@ import * as CategoryController from "../../controller/admin/CategoryController.j
 import * as SubcategoryController from "../../controller/admin/SubcategoryController.js";
 import * as BannerController from "../../controller/admin/BannerController.js";
 import * as ProductController from "../../controller/admin/ProductController.js";
+import * as VarientController from "../../controller/admin/VarientController.js";
 import { upload } from "../../multer.js";
 
 
@@ -79,6 +80,22 @@ Admin.post('/add_product_process', upload.fields([
   ]), ProductController.add_product_process);
 Admin.get('/view_product',FetchSliderData,ProductController.view_product);
 Admin.post('/delete_product/:id',ProductController.delete_product);
+Admin.get('/update_product/:id',FetchSliderData,ProductController.update_product);
+Admin.post('/update_product_process/:id', 
+    upload.fields([
+        { name: 'featureImg', maxCount: 1 }, 
+        { name: 'images', maxCount: 5 }
+    ]), 
+    ProductController.update_product_process
+);
+/////////////////////////////Varient Routes Here/////////////////////////////////////////
+Admin.get('/add_varient/:id',FetchSliderData,VarientController.add_varient);
+Admin.post('/add_varient_process',VarientController.add_varient_process);
+Admin.get('/view_varient',FetchSliderData,VarientController.view_varient);
+Admin.post('/delete_varient/:id',VarientController.delete_varient);
+Admin.get('/update_varient/:id',FetchSliderData,VarientController.update_varient);
+Admin.post('/update_varient_process/:id',VarientController.update_varient_process);
+
 
 
 
