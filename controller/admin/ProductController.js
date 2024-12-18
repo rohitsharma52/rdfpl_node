@@ -37,11 +37,8 @@ export let add_product_process = async (req, res) => {
         category_name,         
         subcategory_id,        
         subcategory_name,      
-        name,
-        mrp,
-        sellPrice,
-        description,
-        hsnCode,
+        name,   
+        description,        
         featureImg,           
         images,                
         bestSeller: bestSeller === 'on', 
@@ -123,10 +120,7 @@ export const update_product_process = async (req, res) => {
 
     // Extract text fields from the form
     const {
-      name,
-      mrp,
-      sellPrice,
-      hsnCode,
+      name,  
       description,
       bestSeller,
       weeklyDeals,
@@ -142,9 +136,6 @@ export const update_product_process = async (req, res) => {
     // Prepare the updated data
     const updatedData = {
       name,
-      mrp,
-      sellPrice,
-      hsnCode,
       description,
       bestSeller: bestSeller === 'on', // Convert "on" to boolean
       weeklyDeals: weeklyDeals === 'on',
@@ -183,6 +174,26 @@ export const update_product_process = async (req, res) => {
   } catch (error) {
     console.error('Error updating product:', error);
     res.status(500).send({ message: 'Failed to update product', error });
+  }
+};
+
+// ProductController.js
+export let search_product = async (req, res) => {
+  try {
+      const searchQuery = req.query.search;
+      if (!searchQuery) {
+          return res.status(400).json({ error: 'Search query is required' });
+      }
+
+      // Case-insensitive search
+      const products = await Product.find({
+          name: { $regex: searchQuery, $options: 'i' },
+      });
+
+      res.json(products);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
   }
 };
 

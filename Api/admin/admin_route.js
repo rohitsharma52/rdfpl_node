@@ -88,6 +88,7 @@ Admin.post('/update_product_process/:id',
     ]), 
     ProductController.update_product_process
 );
+Admin.get('/search_product',ProductController.search_product)
 /////////////////////////////Varient Routes Here/////////////////////////////////////////
 Admin.get('/add_varient/:id',FetchSliderData,VarientController.add_varient);
 Admin.post('/add_varient_process',VarientController.add_varient_process);

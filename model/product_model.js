@@ -28,22 +28,12 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    mrp: {
-        type: Number,
-        required: true,
-    },
-    sellPrice: {
-        type: Number,
-        required: true,
-    },
+  
     description: {
         type: String,
         required: true,
     },
-    hsnCode: {
-        type: String,
-        required: true,
-    },
+   
     featureImg: {
         type: String,
         required: true,

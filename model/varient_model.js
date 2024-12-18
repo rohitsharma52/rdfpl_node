@@ -14,6 +14,10 @@ const varientSchema = new mongoose.Schema({
         type: String,  // To store image URL or path
         required: true,  // If you want to make it mandatory
     },
+    hsnCode: {
+        type: String,
+        required: true,
+    },
     stock: {
         type: String,  // To store image URL or path
         required: true,  // If you want to make it mandatory

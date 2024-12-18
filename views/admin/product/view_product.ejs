@@ -23,9 +23,23 @@
             <h4 class="mt-0 header-title">View Product</h4>
             <hr style="margin-bottom: 50px;background-color: darkgrey;">
             <div class="container mt-5">
-                    <div class="row">
-                              <div class="col-md-2"> <a class="btn btn-info cticket" href="/auth/add_product" role="button" style="margin-left: 20px;"> Add Product</a></div>
-                            </div>
+              <div class="row">
+                <div class="col-md-2">
+                    <a class="btn btn-info cticket" href="/auth/add_product" role="button" style="margin-left: 20px;"> Add Product</a>
+                </div>
+                <div class="col-md-10 d-flex justify-content-end align-items-center">
+                  <div class="form-group mb-0" style="width: 100%; max-width: 400px;">
+                      <input 
+                          type="text" 
+                          id="searchInput" 
+                          class="form-control" 
+                          placeholder="Search for a product..." 
+                          autocomplete="off">
+                  </div>
+              </div>
+              
+            </div>
+         
                             <hr style="margin-bottom: 50px;background-color: darkgrey;">
                             <div class="table-rep-plugin">
                               <div class="table-responsive b-0" data-pattern="priority-columns">
@@ -34,10 +48,7 @@
                                       <tr>
                                         <th>#</th>
                                         <th data-priority="1">Name</th>
-                                        <th data-priority="1">Feature Img</th>
-                                        <th data-priority="1">MRP</th>
-                                        <th data-priority="1">Sell Price</th>
-                                        <th data-priority="1">HSN Code</th>
+                                        <th data-priority="1">Feature Img</th>                                        
                                         <th data-priority="1">Type</th>
                                         <th data-priority="4">Images</th>
                                         <th data-priority="2">Action</th>
@@ -52,9 +63,7 @@
                                           <td>
                                             <img id="slide_img_path" height="100" width="100" src="/<%= data.featureImg %>">
                                           </td>
-                                          <td><%= data.mrp %></td>
-                                          <td><%= data.sellPrice %></td>
-                                          <td><%= data.hsnCode %></td>
+                                   
                                           <td>
                                             <%= data.bestSeller ? 'Best Seller' : '' %>
                                             <%= data.weeklyDeals ? 'Weekly Deals' : '' %>
@@ -93,4 +102,97 @@
               
           </div>
         </div>
+ <!-- ////////////////search product script //////////////////////////////////////////////////////        -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function () {
+    // Page Load: Sabhi products ko load karna
+    loadProducts();
+
+    // Search input par event listener
+    $("#searchInput").on("input", function () {
+        let query = $(this).val().trim();
+
+        // Agar query empty hai (matlab search input clear ho gaya), toh page reload karen
+        if (query.length === 0) {
+            location.reload(); // Page ko refresh karenge
+        } else if (query.length > 2) { // Agar query length 3 characters se zyada hai, toh search ko trigger karen
+            $.ajax({
+                url: "/auth/search_product/", // Aapke API endpoint ko replace karein
+                method: "GET",
+                data: { search: query },
+                success: function (response) {
+                    displayResults(response);
+                },
+                error: function () {
+                    $("#results").html("<div class='result-item'>Error fetching data</div>");
+                }
+            });
+        }
+    });
+
+    // Function to load products when page loads
+    function loadProducts() {
+        $.ajax({
+            url: "/auth/get_all_products/", // Aapke endpoint ko replace karein jahan saare products aate hain
+            method: "GET",
+            success: function (response) {
+                displayResults(response);
+            },
+            error: function () {
+                $("#results").html("<div class='result-item'>Error fetching data</div>");
+            }
+        });
+    }
+
+    // Display products in table
+    function displayResults(data) {
+        let resultsContainer = $("#userTable tbody"); // Table body ko target karna
+        resultsContainer.empty(); // Previous results ko clear karna
+
+        if (data.length > 0) {
+            let counter = 1; // Serial number ke liye counter
+            data.forEach(item => {
+                let type = '';
+                if (item.bestSeller) type += 'Best Seller ';
+                if (item.weeklyDeals) type += 'Weekly Deals ';
+                if (item.featuredProduct) type += 'Featured';
+
+                let images = item.images.map(image => 
+                    `<img id="slide_img_path" height="100" width="100" src="/${image}" alt="Product Image" style="margin-right: 10px;">`
+                ).join('');
+
+                resultsContainer.append(`
+                    <tr>
+                        <td>${counter}</td>
+                        <td>${item.name}</td>
+                        <td><img id="slide_img_path" height="100" width="100" src="/${item.featureImg}" alt="Feature Image"></td>
+                        <td>${type.trim()}</td>
+                        <td>${images}</td>
+                        <td style="text-align: center;">
+                            <form action="/auth/delete_product/${item._id}" method="post">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <a href="/auth/update_product/${item._id}" class="btn btn-info mb-2 mt-2 d-block">Update</a>
+                            <a href="/auth/add_varient/${item._id}" class="btn btn-info d-block">Add Type</a>
+                        </td>
+                    </tr>
+                `);
+                counter++;
+            });
+        } else {
+            resultsContainer.append(`
+                <tr>
+                    <td colspan="6" style="text-align: center;">No products found</td>
+                </tr>
+            `);
+        }
+    }
+});
+</script>
+
+
+
+       
         <%- include('../common/footer')%> 
