@@ -128,28 +128,30 @@
                                 <a href="shop-grid.html" class="mb-2 d-inline-block text-secondary fw-semibold fs-xxs"><%=feat_data.category_name%></a>
                                 <a href="product-details.html" class="card-title fw-bold d-block mb-2"><%=feat_data.name%></a>
                                 <div class="mb-3">
-                                    <select id="product-variants-<%= feat_data._id %>" 
-                                            class="form-select product-variant-select" 
-                                            data-product-id="<%= feat_data._id %>">
-                                      <option value="default" selected>Select a Variant</option>
+                                    <select id="product-variants-<%= feat_data._id %>" class="form-select product-variant-select" data-product-id="<%= feat_data._id %>">
+                                        <option value="default" selected>Select a Variant</option>
                                     </select>
-                                  </div>
-                                  
-                                  <div class="d-flex align-items-center">
-                                    <h6 class="price text-danger mb-3" id="variant-price-<%= feat_data._id %>">₹<%=feat_data.sellPrice%></h6>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <h6 class="price text-danger mb-3" id="variant-price-<%= feat_data._id %>"></h6>
                                     <h6 class="price text-danger mb-3 ms-3">
-                                      <del id="variant-mrp-<%= feat_data._id %>"><%=feat_data.mrp%></del>
+                                        <del id="variant-mrp-<%= feat_data._id %>"></del>
                                     </h6>
-                                  </div>
-                                  
-                                
+                                </div>
                             </div>
-                            <div class="bg-white">
-                                <a href="#" class="btn btn-secondary d-block btn-md rounded-1">Add to Cart</a>
+                            <div class="bg-white" id="cart-actions-<%= feat_data._id %>">
+                                <form class="add-to-cart-form">
+                                    <input type="hidden" name="product_id" value="<%= feat_data._id %>">
+                                    <input type="hidden" name="variant_id" id="variant-id-<%= feat_data._id %>">
+                                    <input type="hidden" name="quantity" value="1" id="quantity-<%= feat_data._id %>">
+                                    <button type="button" class="btn btn-secondary d-block btn-md rounded-1 add-to-cart-btn">Add to Cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 <% }) %>
+                
+                  
             </div>
             <!-- Navigation Buttons -->
            
@@ -188,53 +190,52 @@
             <div class="swiper-wrapper">
                 <% Best_seller_data.forEach(function(best_data){ %>         
                     <div class="swiper-slide">
-                        <div class="vertical-product-card border_radius position-relative best_seller_bg">
-                            <div class="thumbnail position-relative text-center p-4">
-                                <a href="product-details.html"><img src="/<%=best_data.featureImg%>" alt="product" class="img-fluid"></a>
-                                <div class="product-btns position-absolute d-flex gap-2 flex-column">
-                                    <a href="#" class="rounded-btn"><i class="fa-regular fa-heart"></i></a>
-                                    <a href="#" class="rounded-btn">
-                                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <!-- SVG content -->
-                                        </svg>
-                                    </a>
-                                    <a href="#quickview_modal" data-bs-toggle="modal" class="rounded-btn"><i class="fa-regular fa-eye"></i></a>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <a href="shop-grid.html" class="mb-2 d-inline-block text-secondary fw-semibold fs-xxs"><%=best_data.category_name%></a>
-                                <a href="product-details.html" class="card-title fw-bold d-block mb-2"><%=best_data.name%></a>
-                                <div class="d-flex align-items-center flex-nowrap star-rating fs-xxs mb-2">
-                                    <ul class="d-flex align-items-center me-2">
-                                        <li class="text-warning"><i class="fa-solid fa-star"></i></li>
-                                        <li class="text-warning"><i class="fa-solid fa-star"></i></li>
-                                        <li class="text-warning"><i class="fa-solid fa-star"></i></li>
-                                        <li class="text-warning"><i class="fa-solid fa-star"></i></li>
-                                        <li class="text-warning"><i class="fa-solid fa-star"></i></li>
-                                    </ul>
-                                    <span class="flex-shrink-0">(5.2k Reviews)</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="price text-danger mb-3"><%=best_data.sellPrice%></h6>
-                                    <h6 class="price text-danger mb-3 ms-3"><del><%=best_data.mrp%></del></h6>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="product-variants" class="d-block fw-semibold fs-xxs mb-1">Choose Variant:</label>
-                                    <select id="product-variants" class="form-select">
-                                        <option value="default" selected>Select a Variant</option>
-                                        <option value="option1">Variant 1</option>
-                                        <option value="option2">Variant 2</option>
-                                        <option value="option3">Variant 3</option>
-                                        <option value="option4">Variant 4</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="bg-white">
-                                <a href="#" class="btn btn-secondary d-block btn-md rounded-1">Add to Cart</a>
-                            </div>
+                      <div class="vertical-product-card border_radius position-relative best_seller_bg">
+                        <div class="thumbnail position-relative text-center p-4">
+                          <a href="product-details.html"><img src="/<%=best_data.featureImg%>" alt="product" class="img-fluid"></a>
+                          <div class="product-btns position-absolute d-flex gap-2 flex-column">
+                            <a href="#" class="rounded-btn"><i class="fa-regular fa-heart"></i></a>
+                            <a href="#" class="rounded-btn">
+                              <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- SVG content -->
+                              </svg>
+                            </a>
+                            <a href="#quickview_modal" data-bs-toggle="modal" class="rounded-btn"><i class="fa-regular fa-eye"></i></a>
+                          </div>
                         </div>
+                        <div class="card-content">
+                          <a href="shop-grid.html" class="mb-2 d-inline-block text-secondary fw-semibold fs-xxs"><%=best_data.category_name%></a>
+                          <a href="product-details.html" class="card-title fw-bold d-block mb-2"><%=best_data.name%></a>
+                          
+                          <div class="d-flex align-items-center">
+                            <h6 class="price text-danger mb-3"></h6>
+                            <h6 class="price text-danger mb-3 ms-3"><del></del></h6>
+                          </div>
+                          <div class="mb-3">
+                            <label for="product-variants" class="d-block fw-semibold fs-xxs mb-1">Choose Variant:</label>
+                            <select id="product-variants-<%= best_data._id %>" class="form-select product-variant-select" data-product-id="<%= best_data._id %>">
+                              <option value="default" selected>Select a Variant</option>
+                            </select>
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <h6 class="price text-danger mb-3" id="variant-price-<%= best_data._id %>"></h6>
+                            <h6 class="price text-danger mb-3 ms-3">
+                                <del id="variant-mrp-<%= best_data._id %>"></del>
+                            </h6>
+                        </div>
+                        </div>
+                        <div class="bg-white" id="cart-actions-<%= best_data._id %>">
+                          <form class="add-to-cart-form">
+                            <input type="hidden" name="product_id" value="<%= best_data._id %>">
+                            <input type="hidden" name="variant_id" id="variant-id-<%= best_data._id %>">
+                            <input type="hidden" name="quantity" value="1" id="quantity-<%= best_data._id %>">
+                            <button type="button" class="btn btn-secondary d-block btn-md rounded-1 add-to-cart-btn">Add to Cart</button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                <% }) %>
+                  <% }) %>
+                  
             </div>
             <!-- Navigation Buttons -->
            
@@ -244,6 +245,7 @@
        
     </div>
 </section> <!--trending products end-->
+
 
 <!--banner section start-->
 <section class="banner-section position-relative z-1 overflow-hidden bg-white pt-2">
