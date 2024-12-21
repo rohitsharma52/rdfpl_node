@@ -119,17 +119,17 @@
                                 <nav class="gshop-navmenu ms-3 d-none d-xl-block">
                                     <ul class="d-flex align-itmes-center justify-content-end">
                                         <li class="has-submenu">
-                                            <a href="javascript:void(0)">Home<span class="ms-1 fs-xs float-end">
+                                            <a href="/">Home<span class="ms-1 fs-xs float-end">
                                                       </span></a>                                          
                                         </li>
                                         <li class="has-submenu">
-                                            <a href="javascript:void(0)">Products<span class="ms-1 fs-xs float-end"></span></a>                                        
+                                            <a href="/product">Products<span class="ms-1 fs-xs float-end"></span></a>                                        
                                         </li>
                                         <li class="has-submenu">
-                                            <a href="javascript:void(0)">Blog<span class="ms-1 fs-xs float-end"></span></a>                                        
+                                            <a href="/">Blog<span class="ms-1 fs-xs float-end"></span></a>                                        
                                         </li>
                                         <li class="has-submenu">
-                                            <a href="javascript:void(0)">Contact<span class="ms-1 fs-xs float-end"></span></a>                                           
+                                            <a href="/">Contact<span class="ms-1 fs-xs float-end"></span></a>                                           
                                         </li>
                                     </ul>
                                 </nav>
@@ -160,7 +160,7 @@
                                             <ul class="user-menu">
                                                 <li><a href="my-account.html"><span class="me-2"><i
                                                               class="fa-solid fa-user"></i></span>My Account</a></li>
-                                                <li><a href="cart.html"><span class="me-2"><i
+                                                <li><a href="/cart"><span class="me-2"><i
                                                               class="fa-solid fa-tags"></i></span>My Cart </a></li>
                                                 <li><a href="wishlist.html"><span class="me-2"><i
                                                               class="fa-solid fa-heart"></i></span>My Wishlist</a></li>
@@ -171,133 +171,15 @@
                                         </div>
                                     </div>
                                     <div class="gshop-header-cart position-relative">
-                                        <button type="button" class="header-icon">
+                                        <a href="/cart" class="header-icon" >
                                             <sup id="cart-count">0</sup>
                                             <svg width="18" height="25" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                               <path d="M21.1704 23.9559L19.6264 7.01422C19.5843 6.55156 19.1908 6.19718 18.7194 6.19718H15.5355V4.78227C15.5355 2.14533 13.3583 0 10.6823 0C8.00628 0 5.82937 2.14533 5.82937 4.78227V6.19718H2.6433C2.17192 6.19718 1.77839 6.55156 1.73625 7.01422L0.186259 24.0225C0.163431 24.2735 0.248671 24.5223 0.421216 24.7082C0.593761 24.8941 0.837705 25 1.0933 25H20.2695C20.2702 25 20.2712 25 20.2719 25C20.775 25 21.1826 24.5982 21.1826 24.1027C21.1825 24.0528 21.1784 24.0036 21.1704 23.9559ZM7.65075 4.78227C7.65075 3.1349 9.01071 1.79465 10.6824 1.79465C12.3542 1.79465 13.7142 3.1349 13.7142 4.78227V6.19718H7.65075V4.78227ZM2.08948 23.2055L3.47591 7.99183H5.82937V9.59649C5.82937 10.0921 6.237 10.4938 6.74006 10.4938C7.24313 10.4938 7.65075 10.0921 7.65075 9.59649V7.99183H13.7142V9.59649C13.7142 10.0921 14.1219 10.4938 14.6249 10.4938C15.128 10.4938 15.5356 10.0921 15.5356 9.59649V7.99183H17.8869L19.2733 23.2055H2.08948Z" fill="#5D6374" />
                                             </svg>
-                                          </button>
+                                          </a>
                                           
-                                        <div class="cart-box-wrapper">
-                                            <div class="apt_cart_box theme-scrollbar">
-                                                <ul class="at_scrollbar scrollbar">
-                                                    <li class="d-flex align-items-center">
-                                                        <div class="thumb-wrapper">
-                                                            <a href="#"><img src="/front/assets/img/products/thumb-sm-1.png" alt="products" class="img-fluid"></a>
-                                                        </div>
-                                                        <div class="items-content ms-3">
-                                                            <a href="product-details.html">
-                                                                <h6 class="mb-1">European Lemon Zest...</h6>
-                                                            </a>
-                                                            <div class="products_meta d-flex align-items-center">
-                                                                <div>
-                                                                    <span class="price text-primary fw-semibold">$17.00</span>
-                                                                    <span class="count">x 1</span>
-                                                                </div>
-                                                                <button class="remove_cart_btn"><i
-                                                                      class="fa-solid fa-trash-can"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-center">
-                                                        <div class="thumb-wrapper">
-                                                            <a href="#"><img src="/front/assets/img/products/thumb-sm-2.png" alt="products" class="img-fluid"></a>
-                                                        </div>
-                                                        <div class="items-content ms-3">
-                                                            <a href="product-details.html">
-                                                                <h6 class="mb-1">Popped Rice Crisps...</h6>
-                                                            </a>
-                                                            <div class="products_meta d-flex align-items-center">
-                                                                <div>
-                                                                    <span class="price text-primary fw-semibold">$17.00</span>
-                                                                    <span class="count">x 1</span>
-                                                                </div>
-                                                                <button class="remove_cart_btn"><i
-                                                                      class="fa-solid fa-trash-can"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-center">
-                                                        <div class="thumb-wrapper">
-                                                            <a href="#"><img src="/front/assets/img/products/thumb-sm-3.png" alt="products" class="img-fluid"></a>
-                                                        </div>
-                                                        <div class="items-content ms-3">
-                                                            <a href="product-details.html">
-                                                                <h6 class="mb-1">Dried Onion Men...</h6>
-                                                            </a>
-                                                            <div class="products_meta d-flex align-items-center">
-                                                                <div>
-                                                                    <span class="price text-primary fw-semibold">$17.00</span>
-                                                                    <span class="count">x 1</span>
-                                                                </div>
-                                                                <button class="remove_cart_btn"><i
-                                                                      class="fa-solid fa-trash-can"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-center">
-                                                        <div class="thumb-wrapper">
-                                                            <a href="#"><img src="/front/assets/img/products/thumb-sm-4.png" alt="products" class="img-fluid"></a>
-                                                        </div>
-                                                        <div class="items-content ms-3">
-                                                            <a href="product-details.html">
-                                                                <h6 class="mb-1">European Lemon Zest...</h6>
-                                                            </a>
-                                                            <div class="products_meta d-flex align-items-center">
-                                                                <div>
-                                                                    <span class="price text-primary fw-semibold">$17.00</span>
-                                                                    <span class="count">x 1</span>
-                                                                </div>
-                                                                <button class="remove_cart_btn"><i
-                                                                      class="fa-solid fa-trash-can"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-center">
-                                                        <div class="thumb-wrapper">
-                                                            <a href="#"><img src="/front/assets/img/products/thumb-sm-1.png" alt="products" class="img-fluid"></a>
-                                                        </div>
-                                                        <div class="items-content ms-3">
-                                                            <a href="product-details.html">
-                                                                <h6 class="mb-1">Popped Rice Crisps...</h6>
-                                                            </a>
-                                                            <div class="products_meta d-flex align-items-center">
-                                                                <div>
-                                                                    <span class="price text-primary fw-semibold">$17.00</span>
-                                                                    <span class="count">x 1</span>
-                                                                </div>
-                                                                <button class="remove_cart_btn"><i
-                                                                      class="fa-solid fa-trash-can"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-center">
-                                                        <div class="thumb-wrapper">
-                                                            <a href="#"><img src="/front/assets/img/products/thumb-sm-2.png" alt="products" class="img-fluid"></a>
-                                                        </div>
-                                                        <div class="items-content ms-3">
-                                                            <a href="product-details.html">
-                                                                <h6 class="mb-1">Dried Onion Kinh Men...</h6>
-                                                            </a>
-                                                            <div class="products_meta d-flex align-items-center">
-                                                                <div>
-                                                                    <span class="price text-primary fw-semibold">$17.00</span>
-                                                                    <span class="count">x 1</span>
-                                                                </div>
-                                                                <button class="remove_cart_btn"><i
-                                                                      class="fa-solid fa-trash-can"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                                    <h6 class="mb-0">Subtotal:</h6>
-                                                    <span class="fw-semibold text-primary">$1,247.00</span>
-                                                </div>
-                                                <a href="checkout.html" class="btn btn-primary btn-md d-block mt-4"><span
-                                                      class="me-2"><i class="fa-solid fa-wallet"></i></span>Checkout</a>
-                                            </div>
-                                        </div>
+                                          
+                                     
                                     </div>
                                 </div>
                                 <div class="gshop-header-contact ms-7 position-relative d-none d-lg-flex d-xl-none d-xxl-flex">

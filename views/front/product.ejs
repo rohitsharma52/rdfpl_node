@@ -1,0 +1,254 @@
+<%- include('./common/header') %>
+  <!--breadcrumb section start-->
+  <div class="gstore-breadcrumb position-relative z-1 overflow-hidden mt--50">
+    <img src="front/assets/img/shapes/bg-shape-6.png" alt="bg-shape" class="position-absolute start-0 z--1 w-100 bg-shape">
+    <img src="front/assets/img/shapes/pata-xs.svg" alt="pata" class="position-absolute pata-xs z--1 vector-shape">
+    <img src="front/assets/img/shapes/onion.png" alt="onion" class="position-absolute z--1 onion start-0 top-0 vector-shape">
+    <img src="front/assets/img/shapes/frame-circle.svg" alt="frame circle" class="position-absolute z--1 frame-circle vector-shape">
+    <img src="front/assets/img/shapes/leaf.svg" alt="leaf" class="position-absolute z--1 leaf vector-shape">
+    <img src="front/assets/img/shapes/garlic-white.png" alt="garlic" class="position-absolute z--1 garlic vector-shape">
+    <img src="front/assets/img/shapes/roll-1.png" alt="roll" class="position-absolute z--1 roll vector-shape">
+    <img src="front/assets/img/shapes/roll-2.png" alt="roll" class="position-absolute z--1 roll-2 vector-shape">
+    <img src="front/assets/img/shapes/pata-xs.svg" alt="roll" class="position-absolute z--1 pata-xs-2 vector-shape">
+    <img src="front/assets/img/shapes/tomato-half.svg" alt="tomato" class="position-absolute z--1 tomato-half vector-shape">
+    <img src="front/assets/img/shapes/tomato-slice.svg" alt="tomato" class="position-absolute z--1 tomato-slice vector-shape">
+    <img src="front/assets/img/shapes/cauliflower.png" alt="tomato" class="position-absolute z--1 cauliflower vector-shape">
+    <img src="front/assets/img/shapes/leaf-gray.png" alt="tomato" class="position-absolute z--1 leaf-gray vector-shape">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2 class="mb-2 text-center">Product</h2>
+                    <nav>
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item fw-bold" aria-current="page"><a href="/">Home</a></li>                         
+                            <li class="breadcrumb-item fw-bold" aria-current="page">Product</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumb section end-->
+
+<!--shop grid section start-->
+<section class="gshop-gshop-grid ptb-120">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-xl-3">
+                <div class="gshop-sidebar bg-white rounded-2 overflow-hidden">
+                    <div class="sidebar-widget search-widget bg-white py-5 px-4">
+                        <div class="widget-title d-flex">
+                            <h6 class="mb-0 flex-shrink-0">Search Now</h6>
+                            <span class="hr-line w-100 position-relative d-block align-self-end ms-1"></span>
+                        </div>
+                        <form class="search-form d-flex align-items-center mt-4">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit" class="submit-icon-btn-secondary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
+                    <div class="sidebar-widget category-widget bg-white py-5 px-4 border-top">
+                        <div class="widget-title d-flex">
+                            <h6 class="mb-0 flex-shrink-0">Categories</h6>
+                            <span class="hr-line w-100 position-relative d-block align-self-end ms-1"></span>
+                        </div>
+                        <ul class="widget-nav mt-4">
+                            <%  category_data.forEach(function(c_data){             %>
+                            <li><a href="#" class="d-flex justify-content-between align-items-center"><%=c_data.name%></a></li>
+                            <%}) %>
+                        </ul>
+                    </div>
+                    <div class="sidebar-widget price-filter-widget bg-white py-5 px-4 border-top">
+                        <div class="widget-title d-flex">
+                            <h6 class="mb-0 flex-shrink-0">Filter by Price</h6>
+                            <span class="hr-line w-100 position-relative d-block align-self-end ms-1"></span>
+                        </div>
+                        <div class="at-pricing-range mt-4">
+                            <form class="range-slider-form">
+                                <div class="price-filter-range"></div>
+                                <div class="d-flex align-items-center mt-3">
+                                    <input type="text" oninput="validity.valid||(value='0');" class="min_price price-range-field price-input">
+                                    <span class="d-inline-block ms-2 me-2 fw-bold">-</span>
+                                    <input type="text" oninput="validity.valid||(value='10000');" class="max_price price-range-field price-input">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm mt-3">Filter</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget rating-widget py-5 px-4 border-top bg-white">
+                        <div class="widget-title d-flex">
+                            <h6 class="mb-0 flex-shrink-0">Rating</h6>
+                            <span class="hr-line w-100 position-relative d-block align-self-end ms-1"></span>
+                        </div>
+                        <ul class="mt-4 sidebar-rating-list">
+                            <li class="d-flex align-items-center justify-content-between">
+                                <div class="custom-checkbox d-inline-flex">
+                                    <div class="theme-checkbox flex-shrink-0">
+                                        <input type="checkbox">
+                                        <span class="checkbox-field"><i class="fa-solid fa-check"></i></span>
+                                    </div>
+                                    <div class="rating-field text-warning fs-xs d-flex align-items-center ms-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="fw-bold fs-xs total-count">48</span>
+                            </li>
+                            <li class="d-flex align-items-center justify-content-between">
+                                <div class="custom-checkbox d-inline-flex">
+                                    <div class="theme-checkbox flex-shrink-0">
+                                        <input type="checkbox">
+                                        <span class="checkbox-field"><i class="fa-solid fa-check"></i></span>
+                                    </div>
+                                    <div class="rating-field text-warning fs-xs d-flex align-items-center ms-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="fw-bold fs-xs total-count">14</span>
+                            </li>
+                            <li class="d-flex align-items-center justify-content-between">
+                                <div class="custom-checkbox d-inline-flex">
+                                    <div class="theme-checkbox flex-shrink-0">
+                                        <input type="checkbox">
+                                        <span class="checkbox-field"><i class="fa-solid fa-check"></i></span>
+                                    </div>
+                                    <div class="rating-field text-warning fs-xs d-flex align-items-center ms-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="fw-bold fs-xs total-count">36</span>
+                            </li>
+                            <li class="d-flex align-items-center justify-content-between">
+                                <div class="custom-checkbox d-inline-flex">
+                                    <div class="theme-checkbox flex-shrink-0">
+                                        <input type="checkbox">
+                                        <span class="checkbox-field"><i class="fa-solid fa-check"></i></span>
+                                    </div>
+                                    <div class="rating-field text-warning fs-xs d-flex align-items-center ms-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="fw-bold fs-xs total-count">24</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-widget tags-widget py-5 px-4 bg-white">
+                        <div class="widget-title d-flex">
+                            <h6 class="mb-0">Tags.</h6>
+                            <span class="hr-line w-100 position-relative d-block align-self-end ms-1"></span>
+                        </div>
+                        <div class="mt-4 d-flex gap-2 flex-wrap">
+                            <a href="#" class="btn btn-outline btn-sm">Vegetable</a>
+                            <a href="#" class="btn btn-outline btn-sm">Healthy</a>
+                            <a href="#" class="btn btn-outline btn-sm">Meat</a>
+                            <a href="#" class="btn btn-outline btn-sm">Organic</a>
+                            <a href="#" class="btn btn-outline btn-sm">Nature</a>
+                            <a href="#" class="btn btn-outline btn-sm">food</a>
+                            <a href="#" class="btn btn-outline btn-sm">bd food</a>
+                            <a href="#" class="btn btn-outline btn-sm">fish</a>
+                            <a href="#" class="btn btn-outline btn-sm">vegetable</a>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+            <div class="col-xl-9">
+                <div class="shop-grid">
+                    <div class="listing-top d-flex align-items-center justify-content-between flex-wrap gap-3 bg-white rounded-2 px-4 py-5 mb-6">
+                        <p class="mb-0 fw-bold">Showing <%=productCount%> results of <%=productCount%> results</p>
+                        <div class="listing-top-right text-end d-inline-flex align-items-center gap-3 flex-wrap">
+                            <div class="number-count-filter d-flex align-items-center gap-3">
+                                <label class="fw-bold fs-xs text-dark flex-shrink-0">Show:</label>
+                                <input type="number" value="16">
+                            </div>
+                            <div class="select-filter d-inline-flex align-items-center gap-3">
+                                <label class="fw-bold fs-xs text-dark flex-shrink-0">Sort by:</label>
+                                <select class="form-select fs-xxs fw-medium theme-select select-sm">
+                                    <option>News First</option>
+                                    <option>Best Selling</option>
+                                    <option>Best Rated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+<!-- ///////////////////////////////////////////////////////////////Product Dyanmic Here//////////////////////////////////////////////// -->
+                    <div class="row g-4 justify-content-center">
+        <%  Product_data.forEach(function(p_data){              %>                         
+            <div class="col-lg-4 col-md-6 col-sm-10">
+                <div class="vertical-product-card border_radius position-relative product_bg">
+                    <div class="thumbnail position-relative text-center p-4">
+                        <a href="product-details.html"><img src="/<%=p_data.featureImg%>" alt="product" class="img-fluid"></a>
+                        <div class="product-btns position-absolute d-flex gap-2 flex-column">
+                            <a href="#" class="rounded-btn"><i class="fa-regular fa-heart"></i></a>
+                            <a href="#" class="rounded-btn">
+                                <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- SVG content -->
+                                </svg>
+                            </a>
+                            <a href="#quickview_modal" data-bs-toggle="modal" class="rounded-btn"><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <a href="shop-grid.html" class="mb-2 d-inline-block text-secondary fw-semibold fs-xxs"><%=p_data.category_name%></a>
+                        <a href="product-details.html" class="card-title fw-bold d-block mb-2"><%=p_data.name%></a>
+                        <div class="mb-3">
+                            <select id="product-variants-<%= p_data._id %>" class="form-select product-variant-select" data-product-id="<%= p_data._id %>">
+                                <option value="default" selected>Select a Variant</option>
+                            </select>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <h6 class="price text-danger mb-3" id="variant-price-<%= p_data._id %>"></h6>
+                            <h6 class="price text-danger mb-3 ms-3">
+                                <del id="variant-mrp-<%= p_data._id %>"></del>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="bg-white" id="cart-actions-<%= p_data._id %>">
+                        <form class="add-to-cart-form">
+                            <input type="hidden" name="product_id" value="<%= p_data._id %>">
+                            <input type="hidden" name="variant_id" id="variant-id-<%= p_data._id %>">
+                            <input type="hidden" name="quantity" value="1" id="quantity-<%= p_data._id %>">
+                            <button type="button" class="btn btn-secondary d-block btn-md rounded-1 add-to-cart-btn">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+                     
+        <%})%>              
+                      
+                      
+                      
+                                          
+                    </div>
+                    <ul class="template-pagination d-flex align-items-center mt-6">
+                        <li><a href="#" class="active">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fas fa-arrow-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--shop grid section end-->
+<%- include('./common/footer') %>

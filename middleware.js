@@ -39,3 +39,14 @@ import { Category } from "./model/category_model.js";
     res.status(500).send('Internal Server Error');
 }
   }
+  export const CheckLoginUser = (req, res, next) => {
+    // Check if userId exists in session
+    if (req.session && req.session.userId) {
+      return next(); // User is authenticated, proceed to the next middleware or route handler
+    }
+  
+    // User is not authenticated, redirect to login
+    req.flash('error_msg', 'Please log in to access this page.');
+    res.redirect('/login');
+  };
+  

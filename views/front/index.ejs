@@ -1,5 +1,11 @@
 <%- include('./common/header') %>
 <!--hero section start-->
+<% if (success_msg && success_msg.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%= success_msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
 <section class="gshop-hero pt-120 bg-white position-relative z-1 overflow-hidden">
     <img src="/front/assets/img/shapes/leaf-shadow.png" alt="leaf" class="position-absolute leaf-shape z--1 rounded-circle">
     <img src="/front/assets/img/shapes/mango.png" alt="mango" class="position-absolute mango z--1" data-parallax='{"y": -120}'>
