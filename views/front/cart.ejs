@@ -39,46 +39,55 @@
                 </div>
                 <label for="select-all">Select All(03 ITEMS)</label>
             </div>
-            <a href="#" class="text-gray"><span class="me-2"><i class="fa-solid fa-trash-can"></i></span>Delete</a>
         </div>
         <div class="rounded-2 overflow-hidden">
             <table class="cart-table w-100 mt-4 bg-white">
                 <thead>
-                    <th>Image</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Price</th>
+                  <th>Image</th>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Price</th>
+                  <th>Action</th>
                 </thead>
                 
                 <tbody>
+                  <% cartData.forEach(item => { %>
                     <tr>
-                        <td>
-                            <img src="front/assets/img/products/thumb-sm-1.png" alt="product-thumb" class="img-fluid">
-                        </td>
-                        <td class="text-start product-title">
-                            <h6 class="mb-0">Three Carrot Vegetables Peruvian Cuisine</h6>
-                        </td>
-                        <td>
-                            <div class="product-qty d-inline-flex align-items-center">
-                                <button class="decrese">-</button>
-                                <input type="text" value="01">
-                                <button class="increase">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="text-dark fw-bold me-2 d-lg-none">Unit Price:</span>
-                            <span class="text-dark fw-bold">$140.00</span>
-                        </td>
-                        <td>
-                            <span class="text-dark fw-bold me-2 d-lg-none">Total Price:</span>
-                            <span class="text-dark fw-bold">$140.00</span>
-                        </td>
+                      <td>
+                        <img src="/<%= item.product_image %>" alt="product-thumb" class="img-fluid">
+                      </td>
+                      <td class="text-start product-title">
+                        <h6 class="mb-0"><%= item.product_name %><%= item.pack_size %><%= item.unit %></h6>
+                      </td>
+                      <td>
+                        <div class="product-qty d-inline-flex align-items-center">
+                            <button class="decrease" data-action="decrease">-</button>
+                            <input type="text" class="quantity" value="<%= item.quantity %>" readonly>
+                            <input type="hidden" name="product_id" value="<%= item.product_id %>">
+                            <input type="hidden" name="variant_id" value="<%= item.variant_id %>">
+                            <button class="increase" data-action="increase">+</button>
+                        </div>
+                    </td>
+                    
+                      <td>
+                        <span class="text-dark fw-bold me-2 d-lg-none">Unit Price:</span>
+                        <span class="text-dark fw-bold">₹<%= item.unit_price %></span>
+                      </td>
+                      <td>
+                        <span class="text-dark fw-bold me-2 d-lg-none">Total Price:</span>
+                        <span class="text-dark fw-bold">₹<%= item.total_price %></span>
+                      </td>
+                      <td>
+                        <form action="/delete_cart/<%=item.cart_id%>" method="post">
+                        <button type="submit" class="text-gray"><span class="me-2"><i class="fa-solid fa-trash-can"></i></span></button>
+                        </form>
+                      </td>
                     </tr>
-                   
-                  
+                  <% }); %>
                 </tbody>
-            </table>
+              </table>
+              
         </div>
         <div class="row g-4">
             <div class="col-xl-7">
@@ -100,7 +109,7 @@
                                 <h5 class="mb-0 fw-medium">Subtotal</h5>
                             </td>
                             <td class="py-3">
-                                <h5 class="mb-0 fw-semibold text-end">$1138,00</h5>
+                                <h5 class="mb-0 fw-semibold text-end">₹<%=totalCartAmount%></h5>
                             </td>
                         </tr>
                         <tr class="border-top">
@@ -108,7 +117,7 @@
                                 <h5 class="mb-0">Total</h5>
                             </td>
                             <td class="text-end py-3">
-                                <h5 class="mb-0">$918,00</h5>
+                                <h5 class="mb-0">₹<%=totalCartAmount%></h5>
                             </td>
                         </tr>
                     </table>
