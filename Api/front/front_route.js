@@ -14,6 +14,10 @@ Front.post('/update_cart',HomeController.update_cart);
 Front.get('/cart',fetchcategorydata,CheckLoginUser,HomeController.cart);
 Front.get('/product',fetchcategorydata,HomeController.product);
 
+Front.get('/check_out',fetchcategorydata,CheckLoginUser,HomeController.check_out);
+Front.post('/add_address',HomeController.add_address);
+Front.get('/update_address/:id',fetchcategorydata,CheckLoginUser,HomeController.update_address);
+
 
 
 

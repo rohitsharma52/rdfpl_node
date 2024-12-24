@@ -1,3 +1,4 @@
+import { Address } from "../../model/address_model.js";
 import { Banner } from "../../model/banner_model.js"
 import { Cart } from "../../model/cart_model.js";
 import { Category } from "../../model/category_model.js";
@@ -134,6 +135,8 @@ export const cart = async (req, res) => {
       };
     }));
     const totalCartAmount = cartData.reduce((sum, item) => sum + item.total_price, 0);
+    req.session.totalCartAmount = totalCartAmount;
+
     // Render the 'cart' view and pass the cart data
     res.render('front/cart', { cartData,totalCartAmount });
 
@@ -173,6 +176,45 @@ try{
   }
 
   res.json({ success: true, message: 'Cart updated successfully', updatedItem });
+}
+catch (err) {
+  console.error('Error:', err);
+  return res.status(500).send('Internal Server Error');
+}
+}
+
+
+export const check_out=async(req,res)=>{
+try{
+  const cart_total=req.session.totalCartAmount;
+  const userId = req.session.userId; 
+  const address_data=await Address.find({'user_id':userId})
+  const cart_data= req.locals.cartData;
+res.render('front/checkout',{cart_total,userId,address_data,cart_data})
+}
+catch (err) {
+  console.error('Error:', err);
+  return res.status(500).send('Internal Server Error');
+}
+}
+export const add_address=async(req,res)=>{
+try{
+const get_data=req.body
+const set_data=new Address(get_data);
+await set_data.save()
+res.redirect('/check_out')
+}
+catch (err) {
+  console.error('Error:', err);
+  return res.status(500).send('Internal Server Error');
+}
+}
+export const update_address=async(req,res)=>{
+  const id=req.params.id
+try{
+ const update_data=await Address.find({_id:id})
+
+ res.render('front/update_address',{update_data})
 }
 catch (err) {
   console.error('Error:', err);

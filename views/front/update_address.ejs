@@ -1,0 +1,64 @@
+<%- include('./common/header') %>
+<div class="gstore-product-quick-view bg-white rounded-3 py-6 px-4">
+    <h2 class="modal-title fs-5 mb-3">Update New Address</h2>
+    <div class="row align-items-center g-4 mt-3">
+        <form action="/add_address" method="post">
+            
+            <div class="row g-4">
+                <div class="col-sm-6">
+                    <div class="label-input-field">
+                        <label> Name</label>
+                        <input type="text"  name="name" value="<%=update_data.name%>">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="label-input-field">
+                        <label>Land Mark</label>
+                        <input type="text"name="landmark" value="<%=update_data.landmark%>">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="label-input-field">
+                        <label>Street Address</label>
+                        <input type="text"  name="street_address" value="<%=update_data.street_address%>">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="label-input-field">
+                        <label>Mobile</label>
+                        <input type="tel"  name="phone" value="<%=update_data.phone%>">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="label-input-field">
+                        <label>Email</label>
+                        <input type="email"  name="email" value="<%=update_data.email%>">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="label-input-field">
+                        <label>District</label>
+                        <input type="text"  name="district" value="<%=update_data.district%>">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="label-input-field">
+                        <label>State</label>
+                        <input type="text"  name="state" value="<%=update_data.state%>">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="label-input-field">
+                        <label>Pin Code</label>
+                        <input type="text" name="Pincode" value="<%=update_data.Pincode%>">
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 d-flex">
+                <button type="submit" class="btn btn-secondary btn-md me-3">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include('./common/footer') %>
