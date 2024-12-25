@@ -8,11 +8,11 @@ const varientSchema = new mongoose.Schema({
     },
     unit: {
         type: String,  // To store image URL or path
-        required: true,  // If you want to make it mandatory
+        default:null,  // If you want to make it mandatory
     },
     pack_size: {
         type: String,  // To store image URL or path
-        required: true,  // If you want to make it mandatory
+        default:null,  // If you want to make it mandatory
     },
     hsnCode: {
         type: String,

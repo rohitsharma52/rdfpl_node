@@ -73,7 +73,10 @@ export const check_user = async (req, res) => {
     }
 
     // Success
-    req.session.userId = user._id;
+    res.cookie('userId', user._id, {
+      httpOnly: true,   // Security measure to prevent JS access
+      maxAge: 24 * 60 * 60 * 1000,  // Cookie expiration in milliseconds (1 day)
+  });
 
     // Send userId in the response
     return res.json({
@@ -87,110 +90,20 @@ export const check_user = async (req, res) => {
 };
 
 
-export const save_cart = async (req, res) => {
-  try {
-    const { user_id, cart_data } = req.body;  // Get user_id and cart_data from the request body
 
-    // Array to store all the cart items
-    const cartItems = cart_data.map(item => ({
-      user_id,        // Assign the user_id for each item
-      product_id: item.product_id, // Assuming product_id is part of each cart item
-      variant_id: item.variant_id, // Assuming variant_id is part of each cart item
-      quantity: item.quantity,     // Assuming quantity is part of each cart item
-    }));
 
-    // Save the cart items to the database
-    await Cart.insertMany(cartItems);
 
-    // Send success response
-    return res.status(200).send({ message: 'Cart data saved successfully' });
-  } catch (err) {
-    console.error('Error:', err);
-    return res.status(500).send('Internal Server Error');
-  }
-};
 
-export const cart = async (req, res) => {
-  try {
-    const userId = req.session.userId;  // Assuming you're using user authentication
-    const cartItems = await Cart.find({ user_id: userId }).populate('product_id').populate('variant_id');
-    
-
-    // Prepare data for the frontend 
-    const cartData = await Promise.all(cartItems.map(async (item) => {
-      const product = item.product_id;
-      const variant = item.variant_id;
-
-      return {
-        cart_id: item._id,
-        product_id: product._id,
-        product_name: product.name,  // Assuming 'name' is in the Product model
-        product_image: product.featureImg,  // Assuming 'image' is in the Product model
-        quantity: item.quantity,
-        variant_id:variant._id,
-        unit_price: variant.sell_price,  // Assuming 'sell_price' is in the Variant model
-        pack_size: variant.pack_size,
-        unit: variant.unit, // Assuming 'pack_size' is in the Variant model
-        total_price: item.quantity * variant.sell_price,
-      };
-    }));
-    const totalCartAmount = cartData.reduce((sum, item) => sum + item.total_price, 0);
-    req.session.totalCartAmount = totalCartAmount;
-
-    // Render the 'cart' view and pass the cart data
-    res.render('front/cart', { cartData,totalCartAmount });
-
-  } catch (err) {
-    console.error('Error:', err);
-    return res.status(500).send('Internal Server Error');
-  }
-};
-export const delete_cart=async(req,res)=>{
-  const id=req.params.id
-try{
-  const response=await Cart.findByIdAndDelete(id)
-  res.redirect('/cart')
-}
-catch (err) {
-  console.error('Error:', err);
-  return res.status(500).send('Internal Server Error');
-}
-}
-export const update_cart=async(req,res)=>{
-try{
-  const { product_id, variant_id, quantity } = req.body;
-
-  if (!product_id || !variant_id || !quantity) {
-      return res.status(400).json({ success: false, message: 'Invalid request data' });
-  }
-
-  // Update the cart item based on product_id and variant_id
-  const updatedItem = await Cart.findOneAndUpdate(
-      { product_id, variant_id },
-      { $set: { quantity } },
-      { new: true }
-  );
-
-  if (!updatedItem) {
-      return res.status(404).json({ success: false, message: 'Cart item not found' });
-  }
-
-  res.json({ success: true, message: 'Cart updated successfully', updatedItem });
-}
-catch (err) {
-  console.error('Error:', err);
-  return res.status(500).send('Internal Server Error');
-}
-}
 
 
 export const check_out=async(req,res)=>{
 try{
-  const cart_total=req.session.totalCartAmount;
-  const userId = req.session.userId; 
+  const Prodcut_data = req.session.cartData || [];
+  const cart_total = req.session.totalCartAmount || 0;
+  const userId = req.cookies.userId;
   const address_data=await Address.find({'user_id':userId})
-  const cart_data= req.locals.cartData;
-res.render('front/checkout',{cart_total,userId,address_data,cart_data})
+
+res.render('front/checkout',{cart_total,userId,address_data,Prodcut_data})
 }
 catch (err) {
   console.error('Error:', err);

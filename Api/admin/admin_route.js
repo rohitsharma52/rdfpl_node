@@ -1,55 +1,23 @@
 import express from "express";
 
 import { FetchSliderData } from "../../middleware.js";
-import { Team } from "../../model/team_model.js";
-import { Slider } from "../../model/slider_model.js";
+import * as AdminController from "../../controller/admin/AdminController.js";
 import * as CategoryController from "../../controller/admin/CategoryController.js";
 import * as SubcategoryController from "../../controller/admin/SubcategoryController.js";
 import * as BannerController from "../../controller/admin/BannerController.js";
 import * as ProductController from "../../controller/admin/ProductController.js";
 import * as VarientController from "../../controller/admin/VarientController.js";
 import { upload } from "../../multer.js";
-
-
  export const Admin=express.Router();
+ 
 /////////////////////////////////admin home page///////////////////////////////////////////////
- Admin.get('/',FetchSliderData,(req,res)=>{
-res.render('admin/home')
- });
+Admin.get('/',FetchSliderData,AdminController.home);
 //////////////////////////////////slider Api here///////////////////////////////////////////
- Admin.get('/add_slider',FetchSliderData,(req,res)=>{
-res.render('admin/slider/add_slider')
- });
-
- Admin.post('/add_slider', async (req, res) => {
-    try {
-        const get_data = req.body;
-        const set_data = new Slider(get_data);
-        const response = await set_data.save();
-        req.flash('success_msg','Slider Added Successfull')
-        res.redirect('/auth/');
-    } catch (err) {
-        console.error('Error:', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
+ Admin.get('/add_slider',FetchSliderData,AdminController.add_slider);
+ Admin.post('/add_slider_process',AdminController.add_slider_process);
 //////////////////////////////////Admin Team/////////////////////////////////////////////////
-Admin.get('/add_team',FetchSliderData,(req,res)=>{
-res.render('admin/team/add_team')
-});
-Admin.post('/add_team',async(req,res)=>{
-try{
-let get_data=req.body;
-let set_data=new Team(get_data);
-let rsponse=await set_data.save();
-req.flash('success_msg','Team Member Added Successfull')
-res.redirect('/auth/')
-}
-catch (err) {
-    console.error('Error:', err);
-    res.status(500).send('Internal Server Error');
-}
-})
+Admin.get('/add_team',FetchSliderData,AdminController.add_team);
+Admin.post('/add_team_process',AdminController.add_team_process);
 //////////////////////////////////category route//////////////////////////////////////
 Admin.get('/add_category',FetchSliderData ,CategoryController.add_category);
 Admin.post('/add_category_process',upload.single('image'),CategoryController.add_category_process);

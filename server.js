@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 ///////////////////////////////////Routes////////////////////////////////////////////////
 app.use("/", Front);
 app.use('/auth',checkAuth, Admin);
-app.use('/admin/login',Login);
+app.use('/admin',Login);
 app.use('/ajax',Ajax);
 /////////////////////////////////server/////////////////////////////////////////////////
 const PORT = process.env.PORT || 5000;

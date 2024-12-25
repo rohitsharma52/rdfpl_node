@@ -29,41 +29,47 @@ $('#loginForm').on('submit', async function (e) {
     }
 });
 ///////////////////////////////////sent cart data to server//////////////////////////////////
-function syncCartIfValid() {
-   
+// Function to handle cart sync with server
+function syncCartToServer() {
     const userId = sessionStorage.getItem('userId'); // Get user_id from sessionStorage
     const cartData = JSON.parse(localStorage.getItem('cart')) || []; // Get cart data from localStorage
-
-    // Validate user_id and cart length (both should be valid)
-    if (!userId || cartData.length === 0) {
-        // Agar userId nahi hai ya cart empty hai
-
-        return; // Exit function if either condition is false
+  console.log('cart data',cartData)  
+    // Check if the cart has items and if user is logged in
+    if (!userId) {
+        window.location.href = "/login";
+        // Redirect to login if not logged in
+        return;
     }
-    
-    // Sync cart to server if both conditions are true
+
+    if (cartData.length === 0) {
+        alert("Your cart is empty.");
+        return; // Exit function if cart is empty
+    }
+
+    // Send cart data to the server via AJAX
     $.ajax({
-        url: '/save_cart', // Server API endpoint
+        url: '/save_cart',  // Server API endpoint
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
             user_id: userId,
             cart_data: cartData
         }),
-        success: function (response) {
-            console.log("Cart data successfully synced:", response);
-            // Clear cart after successful sync
-            localStorage.removeItem('cart');
+        success: function(response) {
+          
+            window.location.href = "/cart";
         },
-        error: function (error) {
-            console.error("Error syncing cart data:", error);
+        error: function(error) {
+            console.error("Error syncing cart:", error);
+            alert("Failed to sync cart. Please try again.");
         }
     });
 }
 
+// Event listener for cart button click
 $(document).ready(function() {
-    
-    console.log('Page loaded successfully!');
-    syncCartIfValid()
-   
+    $('#cart-button').on('click', function(event) {
+        event.preventDefault();  // Prevent default anchor behavior
+        syncCartToServer();      // Call the function to sync cart data
+    });
 });

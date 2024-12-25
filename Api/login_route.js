@@ -10,6 +10,9 @@ Login.get('/',(req,res)=>{
     });
     
     // Admin login route
+
+
+    
 Login.post('/check_user', async (req, res) => {
         const { username, password } = req.body;
       
@@ -19,14 +22,14 @@ Login.post('/check_user', async (req, res) => {
           if (!user) {
             // Flash message handling (you need a session store, like express-session)
             req.flash('error_msg', 'Your Username is invalid')
-            return res.status(401).redirect('/auth/login');
+            return res.status(401).redirect('/admin');
           }
       
           // Password validation
           const isPasswordValid = bcrypt.compareSync(password, user.password);
           if (!isPasswordValid) {
             req.flash('error_msg', 'Your Password is invalid plese try again')
-            return res.status(401).redirect('/auth/login');
+            return res.status(401).redirect('/admin');
           }
       
           // Generate JWT token
