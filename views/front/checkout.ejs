@@ -52,15 +52,16 @@
                                             class="tt-custom-radio" 
                                             name="tt-radio" 
                                             id="tt-radio-<%= index + 1 %>" 
+                                            data-address-id="<%= address._id %>" 
                                             <%= index === 0 ? "checked" : "" %>
                                         >
                                         <label for="tt-radio-<%= index + 1 %>" class="tt-address-info bg-white rounded p-4 position-relative">
                                             <strong><%= address.district %></strong>
                                             <address class="fs-sm mb-0">
                                                 <%= address.street_address %> <br>
-                                                <%= address.state %>(<%= address.Pincode %>)
+                                                <%= address.state %> (<%= address.Pincode %>)
                                             </address>
-                                            <a href="/update_address/<%=address._id%>" class="tt-edit-address checkout-radio-link position-absolute">Edit</a>
+                                            <a href="/update_address/<%= address._id %>" class="tt-edit-address checkout-radio-link position-absolute">Edit</a>
                                         </label>
                                     </div>
                                 </div>
@@ -76,84 +77,67 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Product Name</th>
-                                    <th>Category</th>
+                                    <th>Quantity</th>
                                     <th>Price</th>
-                                    <th>Actions</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <% let a = 1; %>
                                 <% Prodcut_data.forEach(item => { %>
-                                  <tr>
-                                    <td>
-                                      <img src="/<%= item.product_image %>" alt="product-thumb" class="img-fluid">
-                                    </td>
-                                    <td class="text-start product-title">
-                                      <h6 class="mb-0"><%= item.product_name %><%= item.pack_size %><%= item.unit %></h6>
-                                    </td>
-                                  
-                                  
-                                    <td>
-                                      <span class="text-dark fw-bold me-2 d-lg-none">Unit Price:</span>
-                                      <span class="text-dark fw-bold">₹<%= item.unit_price %></span>
-                                    </td>
-                                    <td>
-                                      <span class="text-dark fw-bold me-2 d-lg-none">Total Price:</span>
-                                      <span class="text-dark fw-bold">₹<%= item.total_price %></span>
-                                    </td>
-                                    <td>
-                                      <form action="/delete_cart/<%=item.cart_id%>" method="post">
-                                      <button type="submit" class="text-gray"><span class="me-2"><i class="fa-solid fa-trash-can"></i></span></button>
-                                      </form>
-                                    </td>
-                                  </tr>
+                                    <tr>
+                                        <td><%= a %></td>
+                                        <td class="text-start product-title">
+                                            <h6 class="mb-0"><%= item.product_name %> <%= item.pack_size %> <%= item.unit %></h6>
+                                        </td>
+                                        <td>
+                                            <span class="text-dark fw-bold"><%= item.quantity %></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-dark fw-bold">₹<%= item.unit_price %></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-dark fw-bold">₹<%= item.total_price %></span>
+                                        </td>
+                                    </tr>
+                                    <% a++; %>
                                 <% }); %>
-                              </tbody>
+                            </tbody>
                         </table>
                     </div>
-                    
-                    
-
-
-               
-
-
-
-
+                </div>
             </div>
+    
             <div class="col-xl-4">
                 <div class="checkout-sidebar">
                     <div class="sidebar-widget checkout-sidebar py-6 px-4 bg-white rounded-2">
                         <div class="widget-title d-flex">
-                            <h5 class="mb-0 flex-shrink-0">Order Summery</h5>
+                            <h5 class="mb-0 flex-shrink-0">Order Summary</h5>
                             <span class="hr-line w-100 position-relative d-block align-self-end ms-1"></span>
                         </div>
                         <table class="sidebar-table w-100 mt-5">
                             <tr>
-                                <td>Items(2):</td>
-                                <td class="text-end"><%=cart_total%></td>
-                            </tr>
-                            <tr>
                                 <td>Shipping & handling:</td>
-                                <td class="text-end">$3.99</td>
+                                <td class="text-end">₹<span id="shipping"><%= cart_total %></span></td>
                             </tr>
                             <tr>
                                 <td>Before tax:</td>
-                                <td class="text-end">$336,04</td>
+                                <td class="text-end">₹<span id="beforeTax"><%= cart_total %></span></td>
                             </tr>
                         </table>
                         <span class="sidebar-spacer d-block my-4 opacity-50"></span>
                         <div class="d-flex align-items-center justify-content-between">
                             <h6 class="mb-0 fs-md">Tax collected</h6>
-                            <h6 class="mb-0 fs-md">$424.00</h6>
+                            <h6 class="mb-0 fs-md">₹<span id="tax"><%= cart_total %></span></h6>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-md rounded mt-6 w-100">Place Order</button>
-                        <p class="mt-3 mb-0 fs-xs">By Placing your order your agree to our company <a href="#">Privacy-policy</a></p>
+                        <button type="button" id="placeOrderBtn" class="btn btn-primary btn-md rounded mt-6 w-100">Place Order</button>
+                        <p class="mt-3 mb-0 fs-xs">By placing your order you agree to our company <a href="#">Privacy Policy</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    
 
 
 

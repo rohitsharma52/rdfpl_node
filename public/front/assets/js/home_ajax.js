@@ -73,3 +73,50 @@ $(document).ready(function() {
         syncCartToServer();      // Call the function to sync cart data
     });
 });
+///////////////////////////////////////////////Order place ajax here/////////////////////////////////////////////
+$(document).on('click', '#placeOrderBtn', async function () {
+    // Get selected address ID
+    console.log('code run after ordr place button')
+    const selectedAddress = $('input[name="tt-radio"]:checked');
+    const addressId = selectedAddress.data('address-id');
+    // Get total amount
+    const totalAmount = parseFloat($('#beforeTax').text());
+  
+
+    // Fetch user ID from sessionStorage
+    const userId = sessionStorage.getItem('userId');
+
+    // Collect product details (Product Data)
+    const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Validate data
+    if (!addressId || !cartData.length) {
+        alert('Please select an address and ensure your cart is not empty.');
+        return;
+    }
+
+    try {
+        // Send data to the server
+        const response = await $.ajax({
+            url: '/place_order',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                user_id: userId,
+                address_id: addressId,
+                total_amount: totalAmount,
+                cart_data: cartData,
+            }),
+        });
+
+        if (response.success) {            
+            localStorage.removeItem('cart'); // Clear the cart after successful order
+            window.location.href = '/order_comfirm'; // Redirect to order success page
+        } else {
+            alert('Failed to place order. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error placing order:', error);
+        alert('An error occurred. Please try again later.');
+    }
+});
