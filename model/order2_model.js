@@ -16,6 +16,11 @@ const order2Schema = new mongoose.Schema({
         required: true,
         ref: 'Product',
     },
+    variant_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Product',
+    },
     quantity: {
         type: Number,
         required: true,

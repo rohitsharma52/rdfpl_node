@@ -120,3 +120,4 @@ $(document).on('click', '#placeOrderBtn', async function () {
         alert('An error occurred. Please try again later.');
     }
 });
+///////////////////////////////////////Product Search AJax//////////////////////////////////////////////////////

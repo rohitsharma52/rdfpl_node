@@ -1,0 +1,70 @@
+<%- include('../common/header') %>
+<div class="pc-container">
+          <div class="pc-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                 
+                  <div class="col-md-12">
+                    <div class="page-header-title">
+                      <h2 class="mb-0">View Orders</h2>
+                    </div>
+                  </div>
+                  <% if (success_msg && success_msg.length > 0) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <%= success_msg %>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+            <h4 class="mt-0 header-title">View Orders</h4>
+            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+            <div class="container mt-5">
+                   
+                            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+                            <div class="table-rep-plugin">
+                              <div class="table-responsive b-0" data-pattern="priority-columns">
+                                <table id="userTable" class="table  table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th data-priority="1">User Name</th>
+                                      <th data-priority="1">Order Id</th>
+                                      <th data-priority="1">Total Amount</th>
+                                      <th data-priority="1">Status</th>
+                                      <th data-priority="1"> OrderDate</th>                                    
+                                      <th data-priority="6">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                        <% let a = 1; %> <!-- Initialize counter variable -->
+                                        <% orders.forEach(function(data) { %>
+                                          <tr>
+                                            <td><%= a %></td> <!-- Display counter variable -->
+                                            <td><%= data.user_name  %></td> 
+                                            <td><%= data._id %></td>
+                                            <td><%= data.total_amount %></td>
+                                            <td><%= data.status %></td>
+                                            <td><%= new Date(data.date).toLocaleDateString('en-GB') %> <%= new Date(data.date).toLocaleTimeString('en-GB') %></td>
+
+                                            <td style="display:flex;margin-top: 2rem;">
+                                        <form action="/auth/delete_varient/<%= data._id%>"method="post">
+                                        <button type="submit"class="btn btn-danger me-4 ">delete</button>
+                                        </form>
+                                        <a href="/auth/order_details/<%= data._id%>" class="btn btn-info">View</a>
+                                            </td> 
+                                          </tr>
+                                          <% a++; %> <!-- Increment counter variable -->
+                                        <% }); %>
+                                      </tbody>
+                                      
+                                </table>
+                              </div>
+                            </div>   
+                </div>
+          </div>
+        </div>
+        <%- include('../common/footer')%> 

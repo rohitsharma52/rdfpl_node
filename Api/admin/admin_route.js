@@ -7,6 +7,7 @@ import * as SubcategoryController from "../../controller/admin/SubcategoryContro
 import * as BannerController from "../../controller/admin/BannerController.js";
 import * as ProductController from "../../controller/admin/ProductController.js";
 import * as VarientController from "../../controller/admin/VarientController.js";
+import * as OrderController from "../../controller/admin/OrderController.js";
 import { upload } from "../../multer.js";
  export const Admin=express.Router();
  
@@ -64,6 +65,9 @@ Admin.get('/view_varient',FetchSliderData,VarientController.view_varient);
 Admin.post('/delete_varient/:id',VarientController.delete_varient);
 Admin.get('/update_varient/:id',FetchSliderData,VarientController.update_varient);
 Admin.post('/update_varient_process/:id',VarientController.update_varient_process);
+//////////////////////////Orders Route here//////////////////////////////////////
+Admin.get('/all_order',FetchSliderData,OrderController.all_order);
+Admin.get('/order_details/:id',FetchSliderData,OrderController.order_details);
 
 
 

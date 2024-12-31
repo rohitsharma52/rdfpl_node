@@ -1,0 +1,66 @@
+<%- include('../common/header') %>
+<div class="pc-container">
+          <div class="pc-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                 
+                  <div class="col-md-12">
+                    <div class="page-header-title">
+                      <h2 class="mb-0"> Orders Details</h2>
+                    </div>
+                  </div>
+                  <% if (success_msg && success_msg.length > 0) { %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <%= success_msg %>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+            <h4 class="mt-0 header-title">View Orders</h4>
+            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+            <div class="container mt-5">
+                   
+                            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+                            <div class="table-rep-plugin">
+                              <div class="table-responsive b-0" data-pattern="priority-columns">
+                                <table id="userTable" class="table  table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th data-priority="1">Image</th>
+                                      <th data-priority="1">Product Name</th>
+                                      <th data-priority="1">Price</th>
+                                      <th data-priority="1">Quantity</th>
+                                      <th data-priority="1">Total</th>                                                                                          
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                        <% let a = 1; %> <!-- Initialize counter variable -->
+                                        <% order_detail.forEach(function(data) { %>
+                                          <tr>
+                                            <td><%= a %></td> <!-- Display counter variable -->
+                                            <td>
+                                                <img src="/<%= data.featureImg %>" alt="product-thumb" class="img-fluid" style="height:150px;">
+                                              </td>
+                                            <td><%= data.product_name %><%= data.pack_size %><%= data.unit %></td>
+                                            <td><%= data.sell_price %></td>
+                                            <td><%= data.quantity %></td>
+                                            <td><%= data.sell_price*data.quantity %></td>
+
+                                             
+                                          </tr>
+                                          <% a++; %> <!-- Increment counter variable -->
+                                        <% }); %>
+                                      </tbody>
+                                      
+                                </table>
+                              </div>
+                            </div>   
+                </div>
+          </div>
+        </div>
+        <%- include('../common/footer')%> 

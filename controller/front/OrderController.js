@@ -1,5 +1,7 @@
 import { Order1 } from "../../model/order1_model.js";
 import { Order2 } from "../../model/order2_model.js";
+import { Cart } from "../../model/cart_model.js";
+
 
 export const place_order = async (req, res) => {
     try {   
@@ -27,6 +29,7 @@ export const place_order = async (req, res) => {
         }));
 
         await Order2.insertMany(order2Items);
+        await Cart.deleteMany({ user_id: user_id });
 
         res.status(200).send({ success: true, message: 'Order placed successfully', order_id: order1._id });
     } catch (error) {

@@ -22,6 +22,8 @@ Front.post('/add_address',AddressController.add_address);
 Front.get('/update_address/:id',fetchcategorydata,CheckLoginUser,AddressController.update_address);
 Front.post('/place_order',CheckLoginUser,OrderController.place_order);
 Front.get('/order_comfirm',CheckLoginUser,fetchcategorydata,OrderController.order_comfirm);
+Front.get('/user_account',CheckLoginUser,fetchcategorydata,HomeController.user_account);
+Front.get('/order_detail/:id',CheckLoginUser,fetchcategorydata,HomeController.order_detail);
 
 
 
